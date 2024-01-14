@@ -31,7 +31,7 @@ class MyDialogs {
         String? negativeActionName,
         VoidCallback? positiveAction,
         VoidCallback? negativeAction,
-        required String title
+        Widget? title
       }) {
     List<Widget> actions = [];
     if(positiveActionName != null) {
@@ -62,7 +62,7 @@ class MyDialogs {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text(title),
+          title: title,
           actions: actions,
           content: Text(dialogMessage),
         );

@@ -1,21 +1,31 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
 //
-// class Quiz {
-//   String? id;
-//   String? title;
-//   Timestamp? date;
-//   List<Question>? questions;
+// enum Category {essentials, travelling, leisure, bills, payments, learning}
 //
-//   Quiz({
-//     required this.id,
-//     required this.title,
-//     required this.date,
-//     required this.questions,
+// class Expense {
+//    String? id;
+//    String? title;
+//    double? amount;
+//    // DateTime? date;
+//    Category? category;
+//    Timestamp? dateTime;
+//    bool isDeleted;
+//
+//
+//   Expense({
+//     this.id,
+//     this.title,
+//     this.amount,
+//     this.category,
+//     this.dateTime,
+//     this.isDeleted = false
 //   });
-//   Quiz.fromFirestore (Map<String, dynamic>? data) {
+//   Expense.fromFirestore (Map<String, dynamic>? data) {
 //     id = data?['id'];
 //     title = data?['title'];
-//     date = data?['date'];
+//     amount = data?['amount'];
+//     category = data?['category'];
+//     dateTime = data?['date'];
 //     questions = data?['questions'];
 //   }
 //   Map<String, dynamic> toFirestore () {

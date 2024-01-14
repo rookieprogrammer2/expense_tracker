@@ -1,5 +1,17 @@
 abstract class FormValidator {
 
+  // -> Username
+
+  static String? validateUsername(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Username is required';
+    }
+    if (value.length < 4) {
+      return 'Username must be at least 3 characters long';
+    }
+    return null;
+  }
+
  // -> Email
 
   static String? validateEmail(String? value) {
@@ -26,11 +38,11 @@ abstract class FormValidator {
 
   // -> Password Confirmation
 
-  static String? validatePasswordConfirmation(String? password, String? confirmation) {
+  static String? validatePasswordConfirmation(String? confirmation, String? password) {
     if (confirmation == null || confirmation.isEmpty) {
       return 'Password confirmation is required';
     }
-    if (password != confirmation) {
+    if (confirmation != password) {
       return 'Passwords do not match';
     }
     return null;

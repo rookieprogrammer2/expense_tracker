@@ -85,65 +85,75 @@
 //   }
 // }
 
-// import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
-// import 'package:quizzler/providers/auth_provider.dart';
-// import 'package:quizzler/ui/screens/login/login_sc.dart';
-// import 'package:quizzler/utilities/dialogs.dart';
-//
-// class SettingsScreen extends StatelessWidget {
-//   const SettingsScreen({super.key});
-//   static const String routeName = "settings_sc";
-//   @override
-//   Widget build(BuildContext context) {
-//
-//     return SafeArea(
-//         child: Scaffold(
-//           appBar: AppBar(
-//             title: const Text(
-//                 "Settings",
-//             style: TextStyle(
-//               color: Colors.black
-//             ),
-//             ),
-//             backgroundColor: Colors.transparent,
-//             elevation: 0,
-//           ),
-//           body: Padding(
-//             padding: const EdgeInsets.all(20),
-//             child: Column(
-//               children: [
-//                 TextButton(
-//                   onPressed: (){
-//                     signout(context);
-//                   },
-//                   child: const Text(
-//                     "Logout",
-//                     style: TextStyle(
-//                         color: Colors.red,
-//                         fontWeight: FontWeight.bold,
-//                         fontSize: 16
-//                     ),
-//                   ),
-//                 ),
-//               ],
-//             ),
-//           ),
-//         )
-//     );
-//   }
-//   void signout (BuildContext context) {
-//     var authProvider = Provider.of<AuthenticationProvider>(context, listen: false);
-//     MyDialogs.showCustomDialog(
-//         context,
-//         dialogMessage: "Are you sure you want to logout?",
-//         isDismissible: false,
-//       positiveActionName: "Yes",
-//       negativeActionName: "No",
-//       positiveAction: () {
-//           authProvider.logout(context);
-//       }
-//     );
-//   }
-// }
-//
+import 'package:expense_tracker/providers/auth_provider.dart';
+import 'package:expense_tracker/providers/theme_provider.dart';
+import 'package:expense_tracker/utilities/dialogs.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:expense_tracker/providers/auth_provider.dart';
+import 'package:expense_tracker/screens/login_sc.dart';
+import 'package:expense_tracker/utilities/dialogs.dart';
+
+class SettingsScreen extends StatelessWidget {
+  const SettingsScreen({super.key});
+  static const String routeName = "settings_screen";
+  @override
+  Widget build(BuildContext context) {
+    var themeProvider = Provider.of<ThemeProvider>(context);
+    return Padding(
+      padding: const EdgeInsets.all(15),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              themeProvider.isDark() == true ? const CircleAvatar(
+                backgroundColor: Color.fromARGB(255, 53, 74, 83),
+                child: Icon(
+                  Icons.logout,
+                  size: 25,
+                  color: Colors.blue,
+                ),
+              ) : const CircleAvatar(
+                backgroundColor: Colors.white,
+                child: Icon(
+                  Icons.logout,
+                  size: 25,
+                  color: Colors.black,
+                ),
+              ),
+              const SizedBox(width: 3,),
+              TextButton(
+                onPressed: (){
+                  signout(context);
+                },
+                child: const Text(
+                  "Logout",
+                  style: TextStyle(
+                      color: Colors.redAccent,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 20
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+        ],
+      ),
+    );
+  }
+  void signout (BuildContext context) {
+    var authProvider = Provider.of<AuthenticationProvider>(context, listen: false);
+    MyDialogs.showCustomDialog(
+        context,
+        dialogMessage: "Are you sure you want to logout?",
+        isDismissible: false,
+      positiveActionName: "Yes",
+      negativeActionName: "No",
+      positiveAction: () {
+          authProvider.logout(context);
+      }
+    );
+  }
+}
+

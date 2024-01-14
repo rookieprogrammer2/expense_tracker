@@ -7,13 +7,51 @@ class ExpenseItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Card(
+    return Card(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          padding: const EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 16,
+          ),
           child: Column(
             children: [
-              Text(expense.title),
+              Row(
+                children: [
+                  Icon(categoryIcons[expense.category]),
+                  const SizedBox(width: 4,),
+                  Text(
+                      expense.title,
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500
+                      )
+                  ),
+                ],
+              ),
+              const SizedBox(height: 4),
+              Row(
+                children: [
+                  Text('EGP\$ ${expense.amount.toStringAsFixed(2)}'),
+                  const Spacer(),
+                  Text(
+                    expense.formattedDate,
+                    style: const TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+  }
+}
+
+/*
+* children: [
+              Text(expense.title, style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(height: 4),
               Row(
                 children: [
@@ -28,10 +66,4 @@ class ExpenseItem extends StatelessWidget {
                   ),
                 ],
               ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+            ],*/
