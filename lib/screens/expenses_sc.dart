@@ -17,7 +17,14 @@ class ExpensesScreen extends StatefulWidget {
 }
 
 class _ExpensesScreenState extends State<ExpensesScreen> {
-  final List<Expense> _registeredExpenses = [];
+  final List<Expense> _registeredExpenses = [
+    Expense(title: "Flutter Course", date: DateTime.now(), amount: 14, category: Category.learning),
+    Expense(title: "Travelling", date: DateTime.now(), amount: 500, category: Category.travelling),
+    Expense(title: "MacDeez", date: DateTime.now(), amount: 85, category: Category.leisure),
+    Expense(title: "Groceries", date: DateTime.now(), amount: 150, category: Category.essentials),
+    Expense(title: "Car Ins. Payment", date: DateTime.now(), amount: 3000, category: Category.payments),
+    Expense(title: "Electricity Bill", date: DateTime.now(), amount: 500, category: Category.bills),
+  ];
   int tabIndex = 0;
 
   @override
@@ -82,7 +89,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
               children: [
                 Expanded(
                   flex: 1,
-                  child: Chart(expenses: _registeredExpenses),
+                  child: Chart(registeredExpenses: _registeredExpenses),
                 ),
                 Expanded(
                   child: pageContent,
@@ -166,23 +173,4 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
   }
 }
 
-/*
-IconButton(
-            onPressed: () {
-              setState(() {
-                themeProvider.toggleTheme();
-              });
-            },
-            icon: themeProvider.isDark() == true
-                ? const Icon(
-              Icons.light_mode_rounded,
-              size: 25,
-              color: Colors.yellow,
-            )
-                : const Icon(
-              Icons.dark_mode_rounded,
-              size: 25,
-              color: Colors.black,
-            ),
-          ),
-          */
+

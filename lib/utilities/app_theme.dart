@@ -44,7 +44,7 @@ abstract class AppTheme {
             fontWeight: FontWeight.w500,
             color: Colors.white,
           ),
-          color: Colors.transparent,
+          color: Color.fromARGB(255, 53, 74, 83),
           elevation: 0,
           centerTitle: true,
         ),
@@ -90,13 +90,13 @@ abstract class AppTheme {
     ),
 
     appBarTheme: const AppBarTheme(
-      color: Colors.transparent,
+      color: Color.fromARGB(255, 53, 74, 83),
       elevation: 0.0,
       centerTitle: true,
         titleTextStyle: TextStyle(
           fontSize: 23,
           fontWeight: FontWeight.w500,
-          color: Colors.black,
+          color: Colors.white,
         )
     ),
 

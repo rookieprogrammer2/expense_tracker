@@ -44,8 +44,9 @@ class ExpenseBucket {
 
   final Category category;
   final List<Expense> expenses;
+  final String categoryName;
 
-  ExpenseBucket ({required this.category, required this.expenses});
+  ExpenseBucket ({required this.category, required this.expenses, required this.categoryName});
 
   // The following is a getter that returns the sum of all the expenses occurred
   double get totalExpenses {
@@ -57,8 +58,8 @@ class ExpenseBucket {
     return sum;
   }
 
-  ExpenseBucket.forCategory (List<Expense> allExpenses, this.category) :
-        expenses = allExpenses.where((expense) => expense.category == category).toList();
+  ExpenseBucket.forCategory (List<Expense> registeredExpenses, this.category, this.categoryName) :
+        expenses = registeredExpenses.where((expense) => expense.category == category).toList();
 
 
 
