@@ -1,5 +1,4 @@
 import 'package:expense_tracker/firebase_options.dart';
-import 'package:expense_tracker/providers/lang_provider.dart';
 import 'package:expense_tracker/screens/landing_sc.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,7 +10,6 @@ import 'package:expense_tracker/screens/register_sc.dart';
 import 'package:expense_tracker/screens/login_sc.dart';
 import 'package:expense_tracker/screens/expenses_sc.dart';
 import 'package:expense_tracker/screens/settings_sc.dart';
-
 
 
 void main() async {
@@ -35,23 +33,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'expense_tracker',
       theme: ThemeProvider.lightMode,
       darkTheme: ThemeProvider.darkMode,
       themeMode: Provider.of<ThemeProvider>(context).currentTheme,
-      // locale: Locale(languageProvider.currentLocale),
-      // localizationsDelegates: const [
-      //   AppLocalizations.delegate,
-      //   GlobalMaterialLocalizations.delegate,
-      //   GlobalCupertinoLocalizations.delegate,
-      // ],
-      // supportedLocales: const [
-      //   Locale('en'),
-      //   Locale('ar'),
-      // ],
       routes: {
         ExpensesScreen.routeName: (_) => const ExpensesScreen(),
         RegistrationScreen.routeName: (_) => const RegistrationScreen(),
@@ -60,7 +47,7 @@ class MyApp extends StatelessWidget {
         SplashScreen.routeName: (_) => const SplashScreen(),
         LandingScreen.routeName: (_) => const LandingScreen(),
       },
-      initialRoute: ExpensesScreen.routeName,
+      initialRoute: LandingScreen.routeName,
     );
   }
 }

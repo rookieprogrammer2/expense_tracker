@@ -31,7 +31,7 @@ class SplashScreen extends StatelessWidget {
     if(authProvider.alreadyLoggedIn()) {
       Navigator.pushReplacementNamed(context, ExpensesScreen.routeName);
     } else {
-      Navigator.pushReplacementNamed(context, RegistrationScreen.routeName);
+      Navigator.pushReplacementNamed(context, LandingScreen.routeName);
     }
   }
 }

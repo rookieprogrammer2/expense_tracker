@@ -1,16 +1,12 @@
-import 'package:expense_tracker/screens/expenses_sc.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:expense_tracker/providers/auth_provider.dart';
-import 'package:expense_tracker/providers/lang_provider.dart';
-import 'package:expense_tracker/providers/theme_provider.dart';
 import 'package:expense_tracker/screens/login_sc.dart';
 import 'package:expense_tracker/utilities/dialogs.dart';
 import 'package:expense_tracker/utilities/field_validations.dart';
 import 'package:expense_tracker/widgets/my_text_field.dart';
-
 class RegistrationScreen extends StatefulWidget {
   static const routeName = "registration_screen";
 
@@ -183,7 +179,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             style: TextStyle(
               fontSize: 40,
               color: Colors.black,
-              fontWeight: FontWeight.w900,
+              fontWeight: FontWeight.w500,
+              fontFamily: "Lato"
             ),
           ),
         ],
