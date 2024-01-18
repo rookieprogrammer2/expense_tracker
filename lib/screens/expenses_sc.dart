@@ -62,20 +62,18 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
               actions: [
                 IconButton(
                     onPressed: () {
-                      setState(() {
                         themeProvider.toggleTheme();
-                      });
                     },
                     icon: themeProvider.isDark() == true
                         ? const Icon(
-                      Icons.dark_mode_rounded,
-                      size: 25,
-                      color: Colors.black,
-                    )
-                        : const Icon(
                       Icons.light_mode_rounded,
                       size: 25,
                       color: Colors.yellow,
+                    )
+                        : const Icon(
+                      Icons.dark_mode_rounded,
+                      size: 25,
+                      color: Colors.black,
                     ),
                 ),
               ],
