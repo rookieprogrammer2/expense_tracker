@@ -1,11 +1,11 @@
 {
 "landing": "Start saving money by tracking your expenses",
-"landingTwo": "Have a better overview of your spending track and habits, and start saving more money today than ever by tracking your expenses!",
+"landingTwo": "Have a better overview of your spending track and habits, and start saving more money today than ever by tracking your expenses",
 "theme": "Theme",
 "english": "English",
 "arabic": "Arabic",
 "getStarted": "Get Started",
-"noExpenses": "Looks like you don't have any expenses, Hurray!",
+"noExpenses": "Looks like you don't have any expenses.",
 "settings": "Settings",
 "home": "Home",
 "expenseDeleted": "Expense Deleted",
@@ -20,5 +20,12 @@
 "username": "Username",
 "passwordConfirmation": "Password Confirmation",
 "or": "Or",
-"instead": "Instead"
+"instead": "Instead",
+"title": "Title",
+"amount": "Amount",
+"addExpense": "Add Expense",
+"cancel": "Cancel",
+"pleaseEnterAValidTitleAmount": "Please enter a valid title and/or amount",
+"invalidInput": "Invalid input",
+"okay": "Okay"
 }

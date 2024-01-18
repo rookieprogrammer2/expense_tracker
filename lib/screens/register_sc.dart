@@ -1,8 +1,8 @@
+import 'package:expense_tracker/providers/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:expense_tracker/providers/auth_provider.dart';
+import 'package:expense_tracker/providers/authentication_provider.dart';
 import 'package:expense_tracker/screens/login_sc.dart';
 import 'package:expense_tracker/utilities/dialogs.dart';
 import 'package:expense_tracker/utilities/field_validations.dart';
@@ -29,6 +29,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -40,10 +42,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             Expanded(
               child: Container(
                 width: double.infinity,
-                decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 5, 99, 125),
-                  // Color.fromARGB(255, 35, 168, 51),
-                  borderRadius: BorderRadius.only(
+                decoration: BoxDecoration(
+                  color: themeProvider.isDark() ?
+                  const Color.fromARGB(255, 5, 99, 125) :
+                  const Color.fromARGB(255, 35, 168, 51),
+                  borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(50),
                     topRight: Radius.circular(50),
                   ),

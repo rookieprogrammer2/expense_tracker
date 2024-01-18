@@ -3,9 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
-import 'package:expense_tracker/providers/lang_provider.dart';
 import 'package:expense_tracker/providers/theme_provider.dart';
-import 'package:expense_tracker/providers/auth_provider.dart';
+import 'package:expense_tracker/providers/authentication_provider.dart';
 import 'package:expense_tracker/screens/register_sc.dart';
 import 'package:expense_tracker/utilities/dialogs.dart';
 import 'package:expense_tracker/utilities/field_validations.dart';
@@ -25,10 +24,13 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController(text: "123456");
   var formKey = GlobalKey<FormState>();
   bool _obscureText = true;
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.white,
@@ -42,10 +44,11 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Container(
                   width: double.infinity,
                   padding: EdgeInsets.only(bottom: height * 0.21),
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 5, 99, 125),
-                    // Color.fromARGB(255, 35, 168, 51),
-                    borderRadius: BorderRadius.only(
+                  decoration: BoxDecoration(
+                    color: themeProvider.isDark() ?
+                    const Color.fromARGB(255, 5, 99, 125) :
+                    const Color.fromARGB(255, 35, 168, 51),
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(60),
                       topRight: Radius.circular(60),
                     ),

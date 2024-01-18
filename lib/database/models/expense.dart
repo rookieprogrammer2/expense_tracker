@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 
 final dateFormatter = DateFormat.yMd();
 
-const uuid = Uuid();
+final uuidGen = const Uuid().v4();
 
 enum Category {essentials, travelling, leisure, bills, payments, learning}
 
@@ -29,7 +29,7 @@ class Expense {
     required this.date,
     required this.amount,
     required this.category
-  }) : id = uuid.v4();
+  }) : id = uuidGen;
 
   String get formattedDate {
     return dateFormatter.format(date);
@@ -43,23 +43,20 @@ class Expense {
 class ExpenseBucket {
 
   final Category category;
-  final List<Expense> expenses;
-  final String categoryName;
-
-  ExpenseBucket ({required this.category, required this.expenses, required this.categoryName});
+  final List<Expense> _expenses;
 
   // The following is a getter that returns the sum of all the expenses occurred
   double get totalExpenses {
     double sum = 0;
 
-    for(final expense in expenses) {
+    for(final expense in _expenses) {
       sum += expense.amount;
     }
     return sum;
   }
 
-  ExpenseBucket.forCategory (List<Expense> registeredExpenses, this.category, this.categoryName) :
-        expenses = registeredExpenses.where((expense) => expense.category == category).toList();
+  ExpenseBucket.forCategory (List<Expense> registeredExpenses, this.category) :
+        _expenses = registeredExpenses.where((expense) => expense.category == category).toList();
 
 
 

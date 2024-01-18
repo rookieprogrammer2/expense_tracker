@@ -31,7 +31,12 @@ class ExpenseItem extends StatelessWidget {
               const SizedBox(height: 4),
               Row(
                 children: [
-                  Text('EGP\$ ${expense.amount.toStringAsFixed(2)}'),
+                  Text(
+                      'EGP\$ ${expense.amount.toStringAsFixed(2)}',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),),
                   const Spacer(),
                   Text(
                     expense.formattedDate,

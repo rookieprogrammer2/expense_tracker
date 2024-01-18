@@ -1,11 +1,11 @@
 {
-"landing": "ابدأ الأدخار الان عن طريق تتبع نفقاتك!",
+"landing": "ابدأ الأدخار الان عن طريق تتبع نفقاتك",
 "landingTwo": " عن طريق تتبع نفقاتك, ستتمكن من ادخار الأموال أكثر من ذى قبل.",
 "theme": "الخلفيه",
 "english": "الأنجليزيه",
 "arabic": "العربيه",
 "getStarted": "المتابعه",
-"noExpenses": "يبدو أنه ليس لديك أى نفقات. مرحى!",
+"noExpenses": "يبدو أنه ليس لديك أى نفقات.",
 "settings": "الاعدادات",
 "home": "الرئيسيه",
 "expenseDeleted": "تم المسح",
@@ -20,5 +20,12 @@
 "username": "اسم المستخدم",
 "passwordConfirmation": "تأكيد كلمة السر",
 "or": "أو",
-"instead": "الان"
+"instead": "الان",
+"title": "العنوان",
+"amount": "المقدار",
+"addExpense": "اضافه",
+"cancel": "الغائ",
+"pleaseEnterAValidTitleAmount": "برجاء ادخال معلومات صحيحه",
+"invalidInput": "خطأ",
+"okay": "حسنا"
 }

@@ -13,6 +13,7 @@ class LandingScreen extends StatefulWidget {
 }
 
 class _LandingScreenState extends State<LandingScreen> {
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -32,29 +33,35 @@ class _LandingScreenState extends State<LandingScreen> {
           children: [
             const Text(
               textAlign: TextAlign.center,
-              "Start saving money by tracking your expenses",
+              "Start saving more money by keeping track of your expenses",
               style: TextStyle(
-                  fontFamily: "Lato",
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20),
+                fontFamily: "Lato",
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
             ),
             SizedBox(height: height * 0.03),
             const Text(
               textAlign: TextAlign.center,
-              "Have a better overview of your spending track and habits, and start saving more money today than ever by tracking your expenses!",
+              "Have a better overview of your spending track and habits, and start saving more money today than ever by tracking your expenses",
               style: TextStyle(
-                  fontFamily: "Lato",
-                  fontWeight: FontWeight.w400,
-                  fontSize: 20
+                fontFamily: "Lato",
+                fontWeight: FontWeight.w500,
+                fontSize: 20,
               ),
             ),
             SizedBox(height: height * 0.03),
             Container(
-              padding: EdgeInsets.only(left: width * 0.43 ),
+              padding: EdgeInsets.only(left: width * 0.39),
               child: Row(
                 children: [
                   const Text(
                     "Theme",
+                    style: TextStyle(
+                      fontFamily: "Lato",
+                      fontWeight: FontWeight.w600,
+                      fontSize: 17,
+                    ),
                   ),
                   IconButton(
                     onPressed: () {
@@ -62,15 +69,15 @@ class _LandingScreenState extends State<LandingScreen> {
                     },
                     icon: themeProvider.isDark() == true
                         ? const Icon(
-                            Icons.light_mode_rounded,
-                            size: 25,
-                            color: Colors.yellow,
-                          )
+                      Icons.light_mode_rounded,
+                      size: 25,
+                      color: Colors.yellow,
+                    )
                         : const Icon(
-                            Icons.dark_mode_rounded,
-                            size: 25,
-                            color: Colors.black,
-                          ),
+                      Icons.dark_mode_rounded,
+                      size: 25,
+                      color: Colors.black,
+                    ),
                   ),
                 ],
               ),
@@ -94,7 +101,8 @@ class _LandingScreenState extends State<LandingScreen> {
                     "Get Started",
                     style: TextStyle(
                       color: Colors.white,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: "Lato",
                       fontSize: 16,
                     ),
                   ),
@@ -102,8 +110,8 @@ class _LandingScreenState extends State<LandingScreen> {
               ),
             ),
           ],
-        ),
+        )
       ),
     );
   }
-}
+  }

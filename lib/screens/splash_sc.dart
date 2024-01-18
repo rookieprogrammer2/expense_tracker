@@ -4,7 +4,7 @@ import 'package:expense_tracker/screens/landing_sc.dart';
 import 'package:expense_tracker/screens/register_sc.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:expense_tracker/providers/auth_provider.dart';
+import 'package:expense_tracker/providers/authentication_provider.dart';
 import 'package:expense_tracker/utilities/app_assets.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -20,7 +20,7 @@ class SplashScreen extends StatelessWidget {
     return Container(
       decoration: const BoxDecoration(
         image: DecorationImage(
-          fit: BoxFit.fitWidth,
+          fit: BoxFit.cover,
           image: AssetImage(AppAssets.splashScreen),
         ),
       ),

@@ -6,18 +6,18 @@ import 'package:expense_tracker/database/models/expense.dart';
 import 'package:provider/provider.dart';
 
 class Chart extends StatelessWidget {
-  const Chart({super.key, required this.registeredExpenses});
+  const Chart(this._registeredExpenses, {super.key});
 
-  final List<Expense> registeredExpenses;
+  final List<Expense> _registeredExpenses;
 
   List<ExpenseBucket> get buckets {
     return [
-      ExpenseBucket.forCategory(registeredExpenses, Category.essentials, "Essentials"),
-      ExpenseBucket.forCategory(registeredExpenses, Category.leisure, "Leisure"),
-      ExpenseBucket.forCategory(registeredExpenses, Category.travelling, "Travelling"),
-      ExpenseBucket.forCategory(registeredExpenses, Category.payments, "Payments"),
-      ExpenseBucket.forCategory(registeredExpenses, Category.bills, "Bills"),
-      ExpenseBucket.forCategory(registeredExpenses, Category.learning, "Learning"),
+      ExpenseBucket.forCategory(_registeredExpenses, Category.essentials),
+      ExpenseBucket.forCategory(_registeredExpenses, Category.leisure),
+      ExpenseBucket.forCategory(_registeredExpenses, Category.travelling),
+      ExpenseBucket.forCategory(_registeredExpenses, Category.payments),
+      ExpenseBucket.forCategory(_registeredExpenses, Category.bills),
+      ExpenseBucket.forCategory(_registeredExpenses, Category.learning),
     ];
   }
 
@@ -40,7 +40,7 @@ class Chart extends StatelessWidget {
       width: double.infinity,
       height: 180,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(25),
         gradient: LinearGradient(
           colors: [
             Theme.of(context).colorScheme.primary.withOpacity(0.3),

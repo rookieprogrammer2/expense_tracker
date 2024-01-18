@@ -6,6 +6,7 @@ import 'package:expense_tracker/widgets/expenses/expenses_list.dart';
 import 'package:expense_tracker/widgets/expenses/new_expense.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class ExpensesScreen extends StatefulWidget {
   static const String routeName = "expenses_screen";
@@ -29,10 +30,10 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
     Widget pageContent = const Center(
       child: Text(
-        "Looks like you don't have any expenses. Hurray!",
+          "Looks like you don't have any expenses.",
       ),
     );
     if (_registeredExpenses.isNotEmpty) {
@@ -54,9 +55,10 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       ),
       appBar: tabIndex == 0
           ? AppBar(
-              title: const Text(
-                "SpendWise",
-              ),
+              title: SvgPicture.asset(
+                  "assets/icons/logo_white.svg",
+                width: 190,
+              )
             )
           : AppBar(
               actions: [
@@ -78,7 +80,11 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                 ),
               ],
               title: const Text(
-                "Settings",
+                  "Settings",
+                style: TextStyle(
+                    fontFamily: "Lato",
+                    fontWeight: FontWeight.bold
+                ),
               ),
             ),
       bottomNavigationBar: bottomAppBar(),
@@ -87,7 +93,7 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
               children: [
                 Expanded(
                   flex: 1,
-                  child: Chart(registeredExpenses: _registeredExpenses),
+                  child: Chart(_registeredExpenses),
                 ),
                 Expanded(
                   child: pageContent,
@@ -111,17 +117,18 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
               tabIndex = value;
             });
           },
-          items: const [
+          items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined),
-                activeIcon: CircleAvatar(
+                icon: const Icon(Icons.home_outlined),
+                activeIcon: const CircleAvatar(
                   backgroundColor: Colors.white,
                   child: Icon(Icons.home_outlined),
                 ),
-                label: "Home"),
+                label: "Home",
+            ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              activeIcon: CircleAvatar(
+              icon: const Icon(Icons.settings),
+              activeIcon: const CircleAvatar(
                 backgroundColor: Colors.white,
                 child: Icon(Icons.settings),
               ),

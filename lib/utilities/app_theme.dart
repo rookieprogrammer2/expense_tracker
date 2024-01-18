@@ -103,6 +103,7 @@ abstract class AppTheme {
     cardTheme: const CardTheme().copyWith(
       color: kColorScheme.secondaryContainer,
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+
     ),
 
     elevatedButtonTheme: ElevatedButtonThemeData(
