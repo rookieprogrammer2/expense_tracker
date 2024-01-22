@@ -1,7 +1,6 @@
 import 'dart:async';
-import 'package:expense_tracker/screens/expenses_sc.dart';
+import 'package:expense_tracker/screens/expenses_sc/expenses_sc.dart';
 import 'package:expense_tracker/screens/landing_sc.dart';
-import 'package:expense_tracker/screens/register_sc.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:expense_tracker/providers/authentication_provider.dart';

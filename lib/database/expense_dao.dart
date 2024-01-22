@@ -12,12 +12,32 @@ class ExpenseDAO {
     );
   }
 
-  static Future <void> createQuiz (Expense expense, String uid) {
+  static Future <void> createExpense (Expense expense, String uid) {
     var docRef = getExpensesCollection(uid).doc();
     expense.id = docRef.id;
     return docRef.set(expense);
 
   }
+
+  static Future<List<Expense>> getAllExpenses (String uid) async {
+    var expensesSnapshot = await getExpensesCollection(uid).get();
+    var expensesList = expensesSnapshot.docs.map((snapshot) => snapshot.data()).toList();
+    return expensesList;
+  }
+
+  static Future<void> deleteExpense (String expenseID, String uid) async {
+    return getExpensesCollection(uid).doc(expenseID).delete();
+
+  }
+
+  static Stream<List<Expense>> listenToExpenses(String uid) {
+    return getExpensesCollection(uid)
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
+  }
+  // static Stream<QuerySnapshot<Expense>> listenToExpenses (String uid) async* {
+  //   yield* getExpensesCollection(uid).snapshots();
+  // }
 }
 /*
 Containing class: CollectionReference

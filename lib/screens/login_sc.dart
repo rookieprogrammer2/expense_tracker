@@ -1,4 +1,4 @@
-import 'package:expense_tracker/screens/expenses_sc.dart';
+import 'package:expense_tracker/screens/expenses_sc/expenses_sc.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -171,7 +171,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: width * 0.079),
       child: ElevatedButton(
-        onPressed: (){
+        onPressed: () {
           login();
         },
         style: ElevatedButton.styleFrom(
@@ -227,14 +227,14 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   /// <== Logs a user in <== ///
-  void login () async {
+  login () async {
     if (formKey.currentState?.validate() == false) {
       return;
     }
     try {
       MyDialogs.showLoadingDialog(context);
       var authProvider  = Provider.of<AuthenticationProvider>(context, listen: false);
-      await authProvider.login(emailController.text, passwordController.text);
+      await authProvider.login(emailController.text, passwordController.text, context);
       MyDialogs.dismissDialog(context);
       Navigator.pushReplacementNamed (context, ExpensesScreen.routeName);
 

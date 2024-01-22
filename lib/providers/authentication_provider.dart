@@ -1,14 +1,16 @@
-import 'package:expense_tracker/screens/expenses_sc.dart';
+import 'package:expense_tracker/screens/expenses_sc/expenses_sc.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:expense_tracker/database/models/user_model.dart' as MyUser;
 import 'package:expense_tracker/database/user_dao.dart';
 import 'package:expense_tracker/screens/login_sc.dart';
+import 'package:provider/provider.dart';
 
 
 class AuthenticationProvider extends ChangeNotifier {
   User? firebaseAuthenticationUser;
   MyUser.User? databaseUser;
+
   void updateDatabaseUser (MyUser.User? user) {
     databaseUser = user;
     notifyListeners();
@@ -28,7 +30,7 @@ class AuthenticationProvider extends ChangeNotifier {
         ));
   }
 
-  Future<void> login(String emailController, String passwordController) async {
+  Future<void> login(String emailController, String passwordController, BuildContext context) async {
     final credential =
     await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController,
@@ -37,7 +39,6 @@ class AuthenticationProvider extends ChangeNotifier {
     var user = await UsersDAO.getUser(credential.user!.uid);
     updateDatabaseUser(user);
     firebaseAuthenticationUser = credential.user;
-
   }
 
   logout(BuildContext context) async {

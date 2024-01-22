@@ -3,18 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ChartBar extends StatelessWidget {
-  const ChartBar({
-    super.key,
-    required this.fill,
-  });
-
   final double fill;
+  const ChartBar({super.key, required this.fill});
+
 
   @override
   Widget build(BuildContext context) {
-    var themeProvider = Provider.of<ThemeProvider>(context);
-    final isDarkMode =
-        MediaQuery.of(context).platformBrightness == Brightness.dark;
+    ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
     return Expanded(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4),
@@ -36,11 +31,3 @@ class ChartBar extends StatelessWidget {
     );
   }
 }
-
-/*
-Type: double?
-If non-null, the fraction of the incoming height given to the child.
-If non-null, the child is given a tight height constraint
- that is the max incoming height constraint multiplied by this factor.
-If null, the incoming height constraints are passed to the child unmodified.
-*/
