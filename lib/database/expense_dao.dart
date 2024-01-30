@@ -65,6 +65,19 @@ class ExpenseDAO {
         snapshot.docs.map((doc) => doc.data()).toList());
   }
 
+  static Stream<List<Expense>> listenToExpensesByMonth(
+      String uid,
+      DateTime selectedDate,
+      ) {
+    DateTime firstDayOfMonth = DateTime(selectedDate.year, selectedDate.month, 1);
+    DateTime lastDayOfMonth = DateTime(selectedDate.year, selectedDate.month + 1, 0);
+
+    return getExpensesCollection(uid)
+        .where('date', isGreaterThanOrEqualTo: firstDayOfMonth)
+        .where('date', isLessThanOrEqualTo: lastDayOfMonth)
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
+  }
   // static Stream<List<Expense>> listenToExpenses (String uid) async* {
   //   var stream = getExpensesCollection(uid).snapshots();
   //   yield* stream.map((querySnapshot) => querySnapshot.docs.map((doc) => doc.data()).toList());

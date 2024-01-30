@@ -22,6 +22,7 @@ class ExpensesScreen extends StatefulWidget {
 
 class _ExpensesScreenState extends State<ExpensesScreen> {
   int tabIndex = 0;
+  String dropdownValue = "Day";
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +43,10 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
       appBar: tabIndex == 0
           ? AppBar(
               title: SvgPicture.asset(
-              "assets/icons/logo_white.svg",
-              width: 190,
-            ))
+                "assets/icons/logo_white.svg",
+                width: 190,
+              ),
+            )
           : AppBar(
               actions: [
                 IconButton(
@@ -66,41 +68,41 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
               ],
               title: const Text(
                 "Settings",
-                style:
-                    TextStyle(
-                        fontFamily: "Lato",
-                        fontWeight: FontWeight.bold,
-                    ),
+                style: TextStyle(
+                  fontFamily: "Lato",
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
       body: tabIndex == 0
           ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
                 Stack(
                   children: [
                     Container(
                       color: const Color.fromARGB(255, 53, 74, 83),
-                      height: MediaQuery.of(context).size.height * 0.1,
+                      height: MediaQuery.of(context).size.height * 0.11,
                     ),
-                    CalendarTimeline(
-                      initialDate: dateProvider.currentDate,
-                      firstDate: DateTime(DateTime.now().year - 1, DateTime.now().month, DateTime.now().day),
-                      lastDate: DateTime.now(),
-                      onDateSelected: (newDate) {
-                        dateProvider.changeCurrentDate(newDate);
-                        // if (dateProvider.currentDate == newDate) {
-                        //   dateProvider.toggleShowAllExpenses();
-                        // } else {
-                        //   return;
-                        // }
-                      },
-                      leftMargin: 20,
-                      selectableDayPredicate: (date) => date.day != 23,
-                      monthColor: Colors.white,
-                      dayColor: Colors.white,
-                      activeDayColor: Colors.white,
-                      activeBackgroundDayColor: Colors.black,
+                    Container(
+                      padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.01),
+                      child: CalendarTimeline(
+                        initialDate: dateProvider.currentDate,
+                        firstDate: DateTime(DateTime.now().year - 1,
+                            DateTime.now().month, DateTime.now().day),
+                        lastDate: DateTime.now(),
+                        onDateSelected: (newDate) {
+                          dateProvider.changeCurrentDate(newDate);
+                        },
+                        leftMargin: 20,
+                        selectableDayPredicate: (date) => date.day != 23,
+                        monthColor: Colors.white,
+                        dayColor: Colors.white,
+                        activeDayColor: Colors.black,
+                        activeBackgroundDayColor:
+                            const Color.fromARGB(255, 220, 212, 237),
+                      ),
                     ),
                   ],
                 ),
@@ -108,11 +110,10 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
                 Expanded(
                   flex: 1,
                   child: Chart(
-                      expensesStream: ExpenseDAO.listenToExpensesByDate(
-                          FirebaseAuth.instance.currentUser!.uid,
-                          Provider.of<DateProvider>(context).currentDate,
-                      ),
-                  ),
+                      expensesStream: ExpenseDAO.listenToExpensesByMonth(
+                    FirebaseAuth.instance.currentUser!.uid,
+                    Provider.of<DateProvider>(context).currentDate,
+                  )),
                 ),
                 const Expanded(
                   child: ExpensesList(),

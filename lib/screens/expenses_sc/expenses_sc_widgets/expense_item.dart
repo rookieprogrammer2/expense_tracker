@@ -37,7 +37,7 @@ class _ExpenseItemState extends State<ExpenseItem> {
             Row(
               children: [
                 Text(
-                  'EGP\$ ${widget.expense.amount?.toStringAsFixed(2)}',
+                  'EGP ${widget.expense.amount?.toStringAsFixed(2)}',
                   style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,

@@ -31,7 +31,7 @@ class _NewExpenseState extends State<NewExpense> {
         lastDate: DateTime.now()
     );
     setState(() {
-      Provider.of<DateProvider>(context).currentDate = pickedDate ?? DateTime.now();
+      Provider.of<DateProvider>(context, listen: false).currentDate = pickedDate!;
     });
   }
 
@@ -127,7 +127,7 @@ class _NewExpenseState extends State<NewExpense> {
                 keyboardType: TextInputType.number,
                 controller: _expenseAmountController,
                 decoration: InputDecoration(
-                  prefixText: "EGP \$ ",
+                  prefixText: "EGP ",
                   label: const Text(
                     "Amount",
                     style: TextStyle(

@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
         ExpensesScreen.routeName: (_) => const ExpensesScreen(),
         SettingsScreen.routeName: (_) => const SettingsScreen(),
       },
-      initialRoute: LoginScreen.routeName,
+      initialRoute: SplashScreen.routeName,
     );
   }
 }

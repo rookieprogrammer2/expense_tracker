@@ -20,8 +20,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController emailController = TextEditingController(text: "omarx@gmail.com");
-  TextEditingController passwordController = TextEditingController(text: "123456");
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   var formKey = GlobalKey<FormState>();
   bool _obscureText = true;
 
