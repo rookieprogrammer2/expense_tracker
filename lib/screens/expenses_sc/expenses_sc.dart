@@ -1,9 +1,12 @@
-import 'package:expense_tracker/database/models/expense_model.dart';
+import 'package:calendar_timeline/calendar_timeline.dart';
+import 'package:expense_tracker/database/expense_dao.dart';
+import 'package:expense_tracker/providers/date_provider.dart';
 import 'package:expense_tracker/providers/theme_provider.dart';
 import 'package:expense_tracker/screens/chart/chart.dart';
 import 'package:expense_tracker/screens/expenses_sc/expenses_sc_widgets/expenses_list.dart';
 import 'package:expense_tracker/screens/expenses_sc/expenses_sc_widgets/new_expense.dart';
 import 'package:expense_tracker/screens/settings_sc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -18,11 +21,11 @@ class ExpensesScreen extends StatefulWidget {
 }
 
 class _ExpensesScreenState extends State<ExpensesScreen> {
-  final List <Expense> _registeredExpenses = [];
   int tabIndex = 0;
 
   @override
   Widget build(BuildContext context) {
+    DateProvider dateProvider = Provider.of<DateProvider>(context);
     ThemeProvider themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -64,15 +67,52 @@ class _ExpensesScreenState extends State<ExpensesScreen> {
               title: const Text(
                 "Settings",
                 style:
-                    TextStyle(fontFamily: "Lato", fontWeight: FontWeight.bold),
+                    TextStyle(
+                        fontFamily: "Lato",
+                        fontWeight: FontWeight.bold,
+                    ),
               ),
             ),
       body: tabIndex == 0
           ? Column(
               children: [
+
+                Stack(
+                  children: [
+                    Container(
+                      color: const Color.fromARGB(255, 53, 74, 83),
+                      height: MediaQuery.of(context).size.height * 0.1,
+                    ),
+                    CalendarTimeline(
+                      initialDate: dateProvider.currentDate,
+                      firstDate: DateTime(DateTime.now().year - 1, DateTime.now().month, DateTime.now().day),
+                      lastDate: DateTime.now(),
+                      onDateSelected: (newDate) {
+                        dateProvider.changeCurrentDate(newDate);
+                        // if (dateProvider.currentDate == newDate) {
+                        //   dateProvider.toggleShowAllExpenses();
+                        // } else {
+                        //   return;
+                        // }
+                      },
+                      leftMargin: 20,
+                      selectableDayPredicate: (date) => date.day != 23,
+                      monthColor: Colors.white,
+                      dayColor: Colors.white,
+                      activeDayColor: Colors.white,
+                      activeBackgroundDayColor: Colors.black,
+                    ),
+                  ],
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                 Expanded(
                   flex: 1,
-                  child: Chart(_registeredExpenses),
+                  child: Chart(
+                      expensesStream: ExpenseDAO.listenToExpensesByDate(
+                          FirebaseAuth.instance.currentUser!.uid,
+                          Provider.of<DateProvider>(context).currentDate,
+                      ),
+                  ),
                 ),
                 const Expanded(
                   child: ExpensesList(),

@@ -1,8 +1,10 @@
 import 'package:expense_tracker/database/expense_dao.dart';
 import 'package:expense_tracker/database/models/expense_model.dart';
+import 'package:expense_tracker/providers/date_provider.dart';
 import 'package:expense_tracker/screens/expenses_sc/expenses_sc_widgets/expense_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ExpensesList extends StatefulWidget {
   const ExpensesList({super.key});
@@ -15,9 +17,13 @@ class _ExpensesListState extends State<ExpensesList> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<Expense>>(
-        stream: ExpenseDAO.listenToExpenses(
-            FirebaseAuth.instance.currentUser!.uid
-        ),
+        // stream: ExpenseDAO.listenToExpenses(
+        //     FirebaseAuth.instance.currentUser!.uid
+        // ),
+      stream: ExpenseDAO.listenToExpensesByDate(
+        FirebaseAuth.instance.currentUser!.uid,
+        Provider.of<DateProvider>(context).currentDate,
+      ),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
@@ -124,7 +130,7 @@ class _ExpensesListState extends State<ExpensesList> {
 //         );
 //
 //       } else {
-//         var expensesList = snapshot.data?.docs.map((doc) => doc.data()).toList();
+//         var expensesList = snapshot.data;
 //         return ListView.builder(
 //           itemCount: expensesList?.length ?? 0,
 //           itemBuilder: (context, index) {

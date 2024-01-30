@@ -1,4 +1,5 @@
 import 'package:expense_tracker/firebase_options.dart';
+import 'package:expense_tracker/providers/date_provider.dart';
 import 'package:expense_tracker/screens/landing_sc.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,6 +22,7 @@ void main() async {
         providers: [
           ChangeNotifierProvider(create: (context) => AuthenticationProvider()),
           ChangeNotifierProvider(create: (context) => ThemeProvider()..init()),
+          ChangeNotifierProvider(create: (context) => DateProvider()),
         ],
           child: const MyApp(),
       ),
@@ -39,14 +41,14 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeProvider.darkMode,
       themeMode: Provider.of<ThemeProvider>(context).currentTheme,
       routes: {
-        ExpensesScreen.routeName: (_) => const ExpensesScreen(),
-        RegistrationScreen.routeName: (_) => const RegistrationScreen(),
-        LoginScreen.routeName: (_) => const LoginScreen(),
-        SettingsScreen.routeName: (_) => const SettingsScreen(),
         SplashScreen.routeName: (_) => const SplashScreen(),
         LandingScreen.routeName: (_) => const LandingScreen(),
+        RegistrationScreen.routeName: (_) => const RegistrationScreen(),
+        LoginScreen.routeName: (_) => const LoginScreen(),
+        ExpensesScreen.routeName: (_) => const ExpensesScreen(),
+        SettingsScreen.routeName: (_) => const SettingsScreen(),
       },
-      initialRoute: SplashScreen.routeName,
+      initialRoute: LoginScreen.routeName,
     );
   }
 }

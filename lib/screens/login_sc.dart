@@ -43,7 +43,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: SingleChildScrollView(
                 child: Container(
                   width: double.infinity,
-                  padding: EdgeInsets.only(bottom: height * 0.21),
+                  padding: EdgeInsets.only(bottom: height * 0.24),
                   decoration: BoxDecoration(
                     color: themeProvider.isDark() ?
                     const Color.fromARGB(255, 5, 99, 125) :

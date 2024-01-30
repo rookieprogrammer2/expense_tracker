@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expense_tracker/database/models/expense_model.dart';
-import 'package:expense_tracker/database/models/user_model.dart';
 import 'package:expense_tracker/database/user_dao.dart';
 
 class ExpenseDAO {
@@ -35,10 +34,43 @@ class ExpenseDAO {
         .snapshots()
         .map((snapshot) => snapshot.docs.map((doc) => doc.data()).toList());
   }
-  // static Stream<QuerySnapshot<Expense>> listenToExpenses (String uid) async* {
-  //   yield* getExpensesCollection(uid).snapshots();
+
+  static Stream<List<Expense>> listenToExpensesByDate(
+      String uid,
+      DateTime selectedDate,
+      ) async* {
+    var startDate = DateTime(
+      selectedDate.year,
+      selectedDate.month,
+      selectedDate.day,
+      0,
+      0,
+      0,
+    );
+
+    var endDate = DateTime(
+      selectedDate.year,
+      selectedDate.month,
+      selectedDate.day,
+      23,
+      59,
+      59,
+    );
+
+    yield* getExpensesCollection(uid)
+        .where('date', isGreaterThanOrEqualTo: startDate)
+        .where('date', isLessThanOrEqualTo: endDate)
+        .snapshots()
+        .map((snapshot) =>
+        snapshot.docs.map((doc) => doc.data()).toList());
+  }
+
+  // static Stream<List<Expense>> listenToExpenses (String uid) async* {
+  //   var stream = getExpensesCollection(uid).snapshots();
+  //   yield* stream.map((querySnapshot) => querySnapshot.docs.map((doc) => doc.data()).toList());
   // }
 }
+
 /*
 Containing class: CollectionReference
 DocumentReference<User> doc([String? path])

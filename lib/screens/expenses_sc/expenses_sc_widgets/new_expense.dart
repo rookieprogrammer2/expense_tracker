@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expense_tracker/database/expense_dao.dart';
 import 'package:expense_tracker/database/models/expense_model.dart';
 import 'package:expense_tracker/providers/authentication_provider.dart';
+import 'package:expense_tracker/providers/date_provider.dart';
 import 'package:expense_tracker/providers/theme_provider.dart';
 import 'package:expense_tracker/utilities/dialogs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -19,7 +20,7 @@ class _NewExpenseState extends State<NewExpense> {
   final _expenseTitleController = TextEditingController();
   final _expenseAmountController = TextEditingController();
 
-  DateTime _selectedDate = DateTime.now();
+  // DateTime _selectedDate = Provider.of<DateProvider>(context).currentDate;
   Category _selectedCategory = Category.leisure;
 
   void _showDatePicker() async {
@@ -27,9 +28,10 @@ class _NewExpenseState extends State<NewExpense> {
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime(DateTime.now().year - 1, DateTime.now().month, DateTime.now().day),
-        lastDate: DateTime.now());
+        lastDate: DateTime.now()
+    );
     setState(() {
-      _selectedDate = pickedDate!;
+      Provider.of<DateProvider>(context).currentDate = pickedDate ?? DateTime.now();
     });
   }
 
@@ -65,7 +67,7 @@ class _NewExpenseState extends State<NewExpense> {
           title: _expenseTitleController.text,
           amount: enteredAmount!,
           category: _selectedCategory,
-          date: _selectedDate,
+          date: Provider.of<DateProvider>(context, listen: false).currentDate,
         ), FirebaseAuth.instance.currentUser!.uid
     );
   }
@@ -154,7 +156,7 @@ class _NewExpenseState extends State<NewExpense> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  dateFormatter.format(_selectedDate),
+                  dateFormatter.format(Provider.of<DateProvider>(context).currentDate),
                   style: const TextStyle(fontWeight: FontWeight.w500),
                 ),
                 IconButton(
@@ -228,7 +230,7 @@ class _NewExpenseState extends State<NewExpense> {
       children: [
         TextField(
           controller: _expenseTitleController,
-          maxLength: 15,
+          maxLength: 20,
           decoration: InputDecoration(
             label: const Text(
               "Title",
@@ -287,7 +289,7 @@ class _NewExpenseState extends State<NewExpense> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  dateFormatter.format(_selectedDate),
+                  dateFormatter.format(Provider.of<DateProvider>(context).currentDate),
                   style: const TextStyle(
                     fontWeight: FontWeight.w500,
                   ),
